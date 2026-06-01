@@ -121,9 +121,10 @@ st.markdown("""
 @st.cache_resource
 def load_assets():
     try:
-        model = tf.keras.models.load_model('model/titanic_ann_model.keras')
+        model = tf.keras.models.load_model('model/titanic_ann_model.h5')
         scaler = joblib.load('model/scaler.pkl')
         return model, scaler
+
     except Exception as e:
         st.error(f"Error loading model or scaler: {e}")
         return None, None
@@ -143,6 +144,9 @@ with st.container():
                 <span style="font-size: 80px;">🧬</span>
             </div>
         """, unsafe_allow_html=True)
+
+
+
 
 # --- SECTION 2: Project Description ---
 st.markdown("""
@@ -263,7 +267,10 @@ if predict_btn:
             """, unsafe_allow_html=True)
 
     else:
-        st.error("Model or Scaler not found in /model directory. Please ensure 'titanic_ann_model.h5' and 'scaler.pkl' are present.")
+       st.error(
+    "Model or Scaler not found in /model directory. "
+    "Please ensure 'titanic_ann_model.h5' and 'scaler.pkl' are present."
+)
 
 st.markdown("""
     <div style="text-align: center; margin-top: 50px; color: #555; font-size: 0.8rem;">
